@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/19 17:03:19 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/19 18:07:12 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all:		${NAME}
 ${NAME}: 			${SRCS} ${HEAD} ${LIBA}  ${OBJS}
 			@${CC} ${CFLAGS} ${LIBA} ${OBJS} -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
-			${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
+	${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
 
 ${LIBA}:			$(LIB_FILES)
 			@make -C libft
@@ -52,7 +52,7 @@ ${OBJ_DIR}/%.o:		${SRC_DIR}/%.c
 			@mkdir -p ${dir $@}
 			@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
-			${PURPLE} -o  $(notdir $@) ${RESET}"
+	${PURPLE} -o  $(notdir $@) ${RESET}"
 
 clean:
 			${RMR} ${OBJ_DIR}
