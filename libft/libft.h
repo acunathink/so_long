@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 00:52:41 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/05/14 16:19:38 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/19 19:58:09 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# define RED "\033[1;31m"
+# define BLU "\033[1;34m"
+# define GRN "\033[1;32m"
+# define YELL "\033[1;33m"
+# define PURP "\033[1;35m"
+# define NAVY "\033[1;36m"
+# define WHT  "\033[0m"
 
 /*	Part 1 - Libc functions:												  */
 size_t		ft_strlen(const char *s);
