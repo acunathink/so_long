@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    MAkefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/20 15:23:19 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/20 20:38:30 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,16 @@ clean:
 fclean:				clean
 			@echo " delete ${RED} $(notdir ${wildcard ${NAME} ${LIB_DIR}/*.a})\
 			${RESET}"
-			@${RM} ${NAME}
+			@${RM} ${NAME} debug_so
 			@$(shell cd $(LIB_DIR); make fclean)
 
 re:					fclean all
+
+debug_so: 			${SRCS} ${HEAD} ${LIBA}
+			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${LIBA} ${SRCS} -o $@
+			@echo "${NAVY} ${CC} -g ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
+	${PURPLE} $(notdir ${SRCS})	${RESET}  -o ${GREEN} $@ ${RESET}"
+
 
 norm:
 			norminette ${SRCS} ${HEAD}
