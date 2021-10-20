@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/19 19:47:01 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/20 15:11:49 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,5 @@
 # include <stdio.h>
 # include <string.h>
 # include "libft.h"
-
-
 
 #endif

@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/19 18:07:12 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/20 15:23:19 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIB_LIST	:= ${notdir ${LIB_FILES}}
 
 OBJ_DIR		= obj
 OBJS		= ${SRC:%.c=${OBJ_DIR}/%.o}
-DEPS		:= $(OBJS:.o=.d)
+DEPS		= $(OBJS:.o=.d)
 
 INC_DIRS	= ./${LIB_DIR}/
 INC_FLAG	= $(addprefix -I,$(INC_DIRS))
@@ -40,12 +40,12 @@ RMR		= rm -r
 
 all:		${NAME}
 
-${NAME}: 			${SRCS} ${HEAD} ${LIBA}  ${OBJS}
+${NAME}: 			${SRCS} ${HEAD} ${LIBA} ${OBJS}
 			@${CC} ${CFLAGS} ${LIBA} ${OBJS} -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
 	${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
 
-${LIBA}:			$(LIB_FILES)
+${LIBA}:			$(wildcard ${LIB_DIR}/*.c)
 			@make -C libft
 
 ${OBJ_DIR}/%.o:		${SRC_DIR}/%.c
@@ -56,11 +56,12 @@ ${OBJ_DIR}/%.o:		${SRC_DIR}/%.c
 
 clean:
 			${RMR} ${OBJ_DIR}
-			@$(shell cd $(LIB_DIR); make clean)
 			@echo " delete ${RED} ${filter %.o,${LIB_LIST}} ${RESET}"
+			@$(shell cd $(LIB_DIR); make clean)
 
 fclean:				clean
-			@echo " delete ${RED} ${wildcard ${NAME} ${LIB_DIR}/*.a} ${RESET}"
+			@echo " delete ${RED} $(notdir ${wildcard ${NAME} ${LIB_DIR}/*.a})\
+			${RESET}"
 			@${RM} ${NAME}
 			@$(shell cd $(LIB_DIR); make fclean)
 
