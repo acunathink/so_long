@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/20 20:38:30 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/22 01:37:41 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS	= ${addprefix ${SRC_DIR}/, ${SRC}}
 HEAD	= ${SRC_DIR}/so_long.h
 
 LIB_DIR	= libft
+LIB_MLX	= mlx
 LIBA	= ${LIB_DIR}/libft.a
 
 LIB_FILES	:= $(wildcard ${LIB_DIR}/*)
