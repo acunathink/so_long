@@ -7,5 +7,6 @@
 !so*.c
 !get*.c
 !/src/so_*.h
-!/maps/*.ber
+!maps*
+!*.ber
 !Makefile

@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:55 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 17:29:30 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/27 19:16:33 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ void	so_print_map(t_mapconf *mc)
 		ft_putstr_fd(mc->map[i++], 1);
 }
 
+void	so_map_check_p2(t_mapconf *gm)
+{
+	gm->x = 0;
+	if (gm->row < 2)
+		exit(so_end_with_error("unknown map format"));
+	while (gm->x < gm->col - 1)
+		if (gm->map[gm->y][gm->x++] != '1')
+			exit(so_end_with_error("map must be surrounded by walls"));
+	if (gm->exit == 0)
+		exit(so_end_with_error("map must have at least one exit"));
+	if (gm->colect == 0)
+		exit(so_end_with_error("map must have at least one collectible"));
+	if (gm->player == 0)
+		exit(so_end_with_error("map must have at least one starting position"));
+}
+
 void	so_map_check(t_mapconf *gm)
 {
 	while (gm->x < gm->col - 1)
@@ -45,25 +61,26 @@ void	so_map_check(t_mapconf *gm)
 			exit(so_end_with_error("map must be surrounded by walls"));
 	while (++gm->y < gm->row - 1)
 	{
-		if (gm->map[gm->y][0] != '1' || \
-			gm->map[gm->y][gm->col - 2] != '1')
+		if (gm->map[gm->y][0] != '1' || gm->map[gm->y][gm->col - 2] != '1')
 			exit(so_end_with_error("map must be surrounded by walls"));
 		gm->x = 0;
 		while (++gm->x < gm->col - 2)
 		{
 			if (gm->map[gm->y][gm->x] == 'C')
 				gm->colect++;
+			else if (gm->map[gm->y][gm->x] == 'E')
+				gm->exit++;
 			else if (gm->map[gm->y][gm->x] == 'P')
 			{
 				if (++gm->player > 1)
 					exit(so_end_with_error("map must have one start point"));
 			}
-			else if (gm->map[gm->y][gm->x] != '0' && \
-					gm->map[gm->y][gm->x] != '1' && \
-					gm->map[gm->y][gm->x] != 'E')
+			else if (gm->map[gm->y][gm->x] != '1' && \
+					gm->map[gm->y][gm->x] != '0')
 				exit(so_end_with_error("unknown map format"));
 		}
 	}
+	so_map_check_p2(gm);
 }
 
 int	main(int argc, char **argv)

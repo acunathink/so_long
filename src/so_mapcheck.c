@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:50:36 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 17:29:36 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/27 20:20:27 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	so_parsing_map(char ***av, t_mapconf *game)
 	{
 		game->map[game->row] = tmp->content;
 		if (game->col != ft_strlen(game->map[game->row]))
-			exit(so_end_with_error("map must be rectangular"));
+			exit(so_end_with_error("wrong map format"));
 		game->row++;
 		leak = tmp;
 		tmp = tmp->next;
