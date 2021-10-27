@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:55 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 17:08:05 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/27 17:29:30 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	so_print_map(t_mapconf *mc)
 		ft_putstr_fd(mc->map[i++], 1);
 }
 
-void	so_items_account(t_mapconf *gm)
+void	so_map_check(t_mapconf *gm)
 {
 	while (gm->x < gm->col - 1)
 		if (gm->map[0][gm->x++] != '1')
@@ -59,9 +59,9 @@ void	so_items_account(t_mapconf *gm)
 					exit(so_end_with_error("map must have one start point"));
 			}
 			else if (gm->map[gm->y][gm->x] != '0' && \
-					 gm->map[gm->y][gm->x] != '1' && \
-					 gm->map[gm->y][gm->x] != 'E')
-				 exit(so_end_with_error("unknown map format"));
+					gm->map[gm->y][gm->x] != '1' && \
+					gm->map[gm->y][gm->x] != 'E')
+				exit(so_end_with_error("unknown map format"));
 		}
 	}
 }
@@ -70,10 +70,9 @@ int	main(int argc, char **argv)
 {
 	t_mapconf	game;
 
-	if (!so_argcheck(argc, &argv))
-		exit(1);
+	so_arg_check(argc, &argv);
 	so_parsing_map(&argv, &game);
 	so_print_map(&game);
-	so_items_account(&game);
+	so_map_check(&game);
 	exit (0);
 }

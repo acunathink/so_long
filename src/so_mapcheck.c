@@ -6,38 +6,28 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:50:36 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 14:00:11 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/27 17:29:36 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	so_argcheck(int ac, char ***av)
+void	so_arg_check(int ac, char ***av)
 {
 	int	i;
 
 	if (ac == 1 || !(*av)[1] || (*av)[1][0] == '\0')
-	{
-		ft_putendl_fd(RED "Error:" WHT " empty file path", 2);
-		return (0);
-	}
+		exit(so_end_with_error("empty file path"));
 	i = 0;
 	while ((*av)[1][i] != '\0')
 		++i;
 	if (i > 4)
 	{
 		if (ft_strncmp(&((*av)[1][i - 4]), ".ber", 4))
-		{
-			ft_putendl_fd(RED "Error:" WHT " need map file in .ber format", 2);
-			return (0);
-		}
+			exit(so_end_with_error("need map file in .ber format"));
 	}
 	else
-	{
-		ft_putendl_fd(RED "Error:" WHT " need map file in .ber format", 2);
-		return (0);
-	}
-	return (1);
+		exit(so_end_with_error("need map file in .ber format"));
 }
 
 void	add_line(char **gnl, t_list *pline)
@@ -114,7 +104,7 @@ void	so_parsing_map(char ***av, t_mapconf *game)
 	{
 		game->map[game->row] = tmp->content;
 		if (game->col != ft_strlen(game->map[game->row]))
-			exit(so_end_with_error("a row of unequal length"));
+			exit(so_end_with_error("map must be rectangular"));
 		game->row++;
 		leak = tmp;
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 14:34:07 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/27 17:29:43 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_mapconf
 }			t_mapconf;
 
 void	so_parsing_map(char ***av, t_mapconf *game);
-int		so_argcheck(int ac, char ***av);
+void	so_arg_check(int ac, char ***av);
 void	so_parsing_map(char ***av, t_mapconf *game);
 int		so_end_with_error(char *msg);
 
