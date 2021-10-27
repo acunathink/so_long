@@ -6,13 +6,13 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/25 20:44:18 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/27 13:51:18 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= so_long
 
-SRC		= so_main.c get_next_line_utils.c get_next_line.c
+SRC		= so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c
 
 SRC_DIR	= src
 SRCS	= ${addprefix ${SRC_DIR}/, ${SRC}}

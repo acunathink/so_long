@@ -1,0 +1,11 @@
+*
+!.gitignore
+!libft*.c
+!ft*.c
+!*.h
+!src*
+!so*.c
+!get*.c
+!/src/so_*.h
+!/maps/*.ber
+!Makefile
