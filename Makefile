@@ -6,22 +6,23 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/27 13:51:18 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/29 16:13:17 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= so_long
+NAME	=	so_long
 
-SRC		= so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c
+SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
+			so_long.c
 
-SRC_DIR	= src
-SRCS	= ${addprefix ${SRC_DIR}/, ${SRC}}
+SRC_DIR	=	src
+SRCS	=	${addprefix ${SRC_DIR}/, ${SRC}}
 
-HEAD	= ${SRC_DIR}/so_long.h
+HEAD	=	${SRC_DIR}/so_long.h
 
-LIB_DIR	= libft
-LIB_MLX	= mlx
-LIBA	= ${LIB_DIR}/libft.a
+LIB_DIR	=	libft
+LIB_MLX	=	mlx
+LIBA	=	${LIB_DIR}/libft.a
 
 LIB_FILES	:= $(wildcard ${LIB_DIR}/*)
 LIB_LIST	:= ${notdir ${LIB_FILES}}
@@ -33,6 +34,8 @@ DEPS		= $(OBJS:.o=.d)
 INC_DIRS	= ./${LIB_DIR}/
 INC_FLAG	= $(addprefix -I,$(INC_DIRS))
 CPPFLAGS	= $(INC_FLAG)
+MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
+#MLX_FLAGS	= -lmlx -Lminilibx_mms
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -42,8 +45,9 @@ RMR		= rm -r
 all:		${NAME}
 
 ${NAME}: 			${SRCS} ${HEAD} ${LIBA} ${OBJS}
-			@${CC} ${CFLAGS} ${LIBA} ${OBJS} -o $@
+			@${CC} ${CFLAGS} ${MLX_FLAGS} ${LIBA} ${OBJS} -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
+	${BLUE} ${MLX_FLAGS} \
 	${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
 
 ${LIBA}:			$(wildcard ${LIB_DIR}/*.c)
@@ -69,7 +73,7 @@ fclean:				clean
 re:					fclean all
 
 debug_so: 			${SRCS} ${HEAD} ${LIBA}
-			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${LIBA} ${SRCS} -o $@
+			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${MLX_FLAGS} ${LIBA} ${SRCS} -o $@
 			@echo "${NAVY} ${CC} -g ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
 	${PURPLE} $(notdir ${SRCS})	${RESET}  -o ${GREEN} $@ ${RESET}"
 

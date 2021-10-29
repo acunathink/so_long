@@ -6,27 +6,11 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:55 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/27 19:16:33 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/29 20:28:50 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-int	so_end_with_error(char *msg)
-{
-	if (ft_strncmp(msg, "perror", 6))
-	{
-		ft_putstr_fd(RED "Error\n\t" WHT ": ", 2);
-		ft_putendl_fd(msg, 2);
-		write(2, "\n", 1);
-	}
-	else
-	{
-		perror(RED "Error\n\t" WHT);
-		write(2, "\n", 1);
-	}
-	return (1);
-}
 
 void	so_print_map(t_mapconf *mc)
 {
@@ -40,11 +24,11 @@ void	so_print_map(t_mapconf *mc)
 
 void	so_map_check_p2(t_mapconf *gm)
 {
-	gm->x = 0;
+	gm->wid = 0;
 	if (gm->row < 2)
 		exit(so_end_with_error("unknown map format"));
-	while (gm->x < gm->col - 1)
-		if (gm->map[gm->y][gm->x++] != '1')
+	while (gm->wid < gm->col - 1)
+		if (gm->map[gm->hei][gm->wid++] != '1')
 			exit(so_end_with_error("map must be surrounded by walls"));
 	if (gm->exit == 0)
 		exit(so_end_with_error("map must have at least one exit"));
@@ -54,29 +38,34 @@ void	so_map_check_p2(t_mapconf *gm)
 		exit(so_end_with_error("map must have at least one starting position"));
 }
 
+void	so_player_check(t_mapconf *gm)
+{
+	gm->x = gm->wid;
+	gm->y = gm->hei;
+	if (++gm->player > 1)
+		exit(so_end_with_error("map must have only one starting position"));
+}
+
 void	so_map_check(t_mapconf *gm)
 {
-	while (gm->x < gm->col - 1)
-		if (gm->map[0][gm->x++] != '1')
+	while (gm->wid < gm->col - 1)
+		if (gm->map[0][gm->wid++] != '1')
 			exit(so_end_with_error("map must be surrounded by walls"));
-	while (++gm->y < gm->row - 1)
+	while (++gm->hei < gm->row - 1)
 	{
-		if (gm->map[gm->y][0] != '1' || gm->map[gm->y][gm->col - 2] != '1')
+		if (gm->map[gm->hei][0] != '1' || gm->map[gm->hei][gm->col - 2] != '1')
 			exit(so_end_with_error("map must be surrounded by walls"));
-		gm->x = 0;
-		while (++gm->x < gm->col - 2)
+		gm->wid = 0;
+		while (++gm->wid < gm->col - 2)
 		{
-			if (gm->map[gm->y][gm->x] == 'C')
+			if (gm->map[gm->hei][gm->wid] == 'C')
 				gm->colect++;
-			else if (gm->map[gm->y][gm->x] == 'E')
+			else if (gm->map[gm->hei][gm->wid] == 'E')
 				gm->exit++;
-			else if (gm->map[gm->y][gm->x] == 'P')
-			{
-				if (++gm->player > 1)
-					exit(so_end_with_error("map must have one start point"));
-			}
-			else if (gm->map[gm->y][gm->x] != '1' && \
-					gm->map[gm->y][gm->x] != '0')
+			else if (gm->map[gm->hei][gm->wid] == 'P')
+				so_player_check(gm);
+			else if (gm->map[gm->hei][gm->wid] != '1' && \
+					gm->map[gm->hei][gm->wid] != '0')
 				exit(so_end_with_error("unknown map format"));
 		}
 	}
@@ -91,5 +80,6 @@ int	main(int argc, char **argv)
 	so_parsing_map(&argv, &game);
 	so_print_map(&game);
 	so_map_check(&game);
+	so_long(&game);
 	exit (0);
 }

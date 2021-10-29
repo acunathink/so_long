@@ -10,3 +10,9 @@
 !maps*
 !*.ber
 !Makefile
+!images*
+!exit.xpm
+!collectable.xpm
+!player.xpm
+!wall.xpm
+!grass.xpm
