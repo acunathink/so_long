@@ -6,14 +6,14 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/29 16:13:17 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/10/31 16:17:46 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
 
 SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
-			so_long.c
+			so_long.c so_moving.c
 
 SRC_DIR	=	src
 SRCS	=	${addprefix ${SRC_DIR}/, ${SRC}}
@@ -35,7 +35,7 @@ INC_DIRS	= ./${LIB_DIR}/
 INC_FLAG	= $(addprefix -I,$(INC_DIRS))
 CPPFLAGS	= $(INC_FLAG)
 MLX_FLAGS	= -lmlx -framework OpenGL -framework AppKit
-#MLX_FLAGS	= -lmlx -Lminilibx_mms
+#MLX_FLAGS	= -lmlx -lXext -lX11
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
@@ -53,7 +53,7 @@ ${NAME}: 			${SRCS} ${HEAD} ${LIBA} ${OBJS}
 ${LIBA}:			$(wildcard ${LIB_DIR}/*.c)
 			@make -C libft
 
-${OBJ_DIR}/%.o:		${SRC_DIR}/%.c
+${OBJ_DIR}/%.o:		${SRC_DIR}/%.c ${HEAD}
 			@mkdir -p ${dir $@}
 			@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \

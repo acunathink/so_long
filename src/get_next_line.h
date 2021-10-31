@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:58:02 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/25 20:10:25 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/31 15:11:38 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 char				*get_next_line(int fd);
 char				*ft_getn(char **line, char *n, char **gnl, char **buff);
 char				*ft_gnl(char *nl, char *n, char **line);
-//int					ft_getline(int fd, char **nl, char **line);
 int					ft_saveline(char **g, char **b, char **l, int readres);
 int					ft_find_nl(char **gnl, char **line, char **n, int flag);
 char				*so_stjoin(char **s1, char **s2);

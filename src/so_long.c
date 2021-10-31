@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:00:59 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/29 20:28:54 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/31 18:53:27 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,23 @@ int	so_end_with_error(char *msg)
 	return (1);
 }
 
+void	so_print_image(t_mapconf *game)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < (int)game->row)
+	{
+		x = -1;
+		while (++x < (int)game->col - 1)
+			so_put_image(x, y, game);
+	}
+}
+
 void	so_image_init(t_mapconf *game)
 {
 	t_images	*img;
-	int			x;
-	int			y;
 
 	img = (t_images *)malloc(sizeof(t_images));
 	*img = (t_images)
@@ -44,17 +56,12 @@ void	so_image_init(t_mapconf *game)
 		.grass = mlx_xpm_file_to_image(game->mlx, GRAS, &img->wid, &img->hei),
 		.player = mlx_xpm_file_to_image(game->mlx, PLAY, &img->wid, &img->hei),
 		.exit = mlx_xpm_file_to_image(game->mlx, EXIT, &img->wid, &img->hei),
+		.black = mlx_xpm_file_to_image(game->mlx, BLACK, &img->wid, &img->hei)
 	};
 	if (!img->colect || !img->wall || !img->grass || !img->player || !img->exit)
 		exit(so_end_with_error("unable to use images"));
 	game->img = img;
-	y = -1;
-	while (++y < (int)game->row)
-	{
-		x = -1;
-		while (++x < (int)game->col - 1)
-			so_put_image(x, y, game);
-	}
+	so_print_image(game);
 }
 
 void	so_put_image(int x, int y, t_mapconf *g)
@@ -76,6 +83,28 @@ void	so_put_image(int x, int y, t_mapconf *g)
 		(g->mlx, g->window, g->img->exit, x * g->img->wid, y * g->img->hei);
 }
 
+int	so_close_game(int keycode, t_mapconf *gm)
+{
+	if (keycode == WINNER)
+	{
+		ft_putendl_fd(GRN "\n YOU are WINNER\n" WHT, 1);
+		mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, 0x90FFA0, \
+		"YOU are WINNER");
+		gm->map[gm->y - 1][gm->x] = '1';
+		gm->map[gm->y + 1][gm->x] = '1';
+		gm->map[gm->y][gm->x + 1] = '1';
+		gm->map[gm->y][gm->x - 1] = '1';
+		mlx_hook(gm->window, 17, 0, so_close_game, gm);
+		mlx_loop(gm->mlx);
+	}
+	else
+		ft_putendl_fd(RED "\nGAME OVER\n" WHT, 1);
+	fflush(NULL);
+	(void) gm;
+	(void) keycode;
+	exit(0);
+}
+
 void	so_long(t_mapconf *game)
 {
 	game->wid *= 32;
@@ -87,5 +116,7 @@ void	so_long(t_mapconf *game)
 	if (!game->window)
 		exit(so_end_with_error("fail making new window"));
 	so_image_init(game);
+	mlx_key_hook(game->window, so_press_key, game);
+	mlx_hook(game->window, 17, 0, so_close_game, game);
 	mlx_loop(game->mlx);
 }
