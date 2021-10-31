@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/31 18:36:48 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/31 20:39:21 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_mapconf
 	size_t		step;
 	size_t		x;
 	size_t		y;
+	int			key;
 	void		*mlx;
 	void		*window;
 	t_images	*img;
@@ -62,11 +63,14 @@ typedef struct s_mapconf
 # define PRESS_A 0
 # define PRESS_S 1
 # define PRESS_D 2
-
+# define MAP 46
+# define PK 40
+# define P 35
 # define UP 126
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
+# define COLOR 8
 
 void	so_parsing_map(char ***av, t_mapconf *game);
 void	so_arg_check(int ac, char ***av);

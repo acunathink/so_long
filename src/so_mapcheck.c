@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:50:36 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/28 14:52:14 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/31 20:35:14 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	so_map_conf_init(t_mapconf *game, int count)
 {
 	*game = (t_mapconf)
 	{
-		.col = 0, .row = 0, .x = 0, .y = 0, .hei = 0, .wid = 0,
+		.col = 0, .row = 0, .x = 0, .y = 0, .hei = 0, .wid = 0, .key = 0,
 		.player = 0, .exit = 0, .colect = 0, .step = 0, .map = NULL
 	};
 	game->map = (char **)malloc(sizeof(char *) * count);

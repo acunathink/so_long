@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:55 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/29 20:28:50 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/10/31 20:06:49 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	main(int argc, char **argv)
 
 	so_arg_check(argc, &argv);
 	so_parsing_map(&argv, &game);
-	so_print_map(&game);
 	so_map_check(&game);
 	so_long(&game);
 	exit (0);
