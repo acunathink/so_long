@@ -12,8 +12,8 @@
 !Makefile
 !images*
 !exit.xpm
-!collectable.xpm
-!player.xpm
+!collectable*
+!player*
 !wall.xpm
-!grass.xpm
+!grass*
 !black.xpm
