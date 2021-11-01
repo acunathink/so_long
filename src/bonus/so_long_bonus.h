@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 19:46:40 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/01 22:38:27 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,7 @@ int		so_move_player(int key, t_mapconf *gm);
 int		so_press_key(int keycode, t_mapconf *gm);
 int		so_close_game(int keycode, t_mapconf *gm);
 void	so_print_map(t_mapconf *mc);
+int		so_atloop(t_mapconf *gm);
+void	so_print_image(t_mapconf *game);
 
 #endif

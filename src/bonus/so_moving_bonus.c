@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 14:57:34 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 15:22:16 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/01 23:02:15 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	so_move_player(int keycode, t_mapconf *gm)
 int	so_press_key(int keycode, t_mapconf *gm)
 {
 	if (so_move_player(keycode, gm))
-		printf("step %zu\n", ++gm->step);
+		++gm->step;
 	if (gm->key % 2)
 		printf("\tkeycode: %d\n", keycode);
 	fflush(NULL);
@@ -94,4 +94,28 @@ int	so_close_game(int keycode, t_mapconf *gm)
 	(void) gm;
 	(void) keycode;
 	exit(0);
+}
+
+int	so_atloop(t_mapconf *gm)
+{
+	int	x;
+	int	y;
+
+	y = -1;
+	while (++y < 1)
+	{
+		x = -1;
+		while (++x < 4)
+		{
+			mlx_put_image_to_window(gm->mlx, gm->window, gm->img->black, \
+									x * gm->img->wid, y * gm->img->hei);
+			so_put_image(x, y, gm);
+		}
+	}
+//	mlx_put_image_to_window(gm->mlx, gm->window, gm->img->black, \
+//									1 * gm->img->wid, 0 * gm->img->hei);
+	mlx_string_put(gm->mlx, gm->window, gm->img->wid / 3, gm->img->hei / 5, \
+		0xfa6a03, ft_itoa(gm->step));
+//	printf(RED "step: %zu\n" WHT, gm->step);
+	return (0);
 }

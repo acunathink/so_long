@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:00:59 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 21:37:38 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/01 22:32:15 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	so_long(t_mapconf *game)
 	mlx_key_hook(game->window, so_press_key, game);
 	mlx_hook(game->window, 17, 0, so_close_game, game);
 	mlx_loop_hook(game->mlx, so_press_key, game);
-	mlx_do_key_autorepeaton(game->mlx);
+//	mlx_do_key_autorepeaton(game->mlx);
+	mlx_loop_hook(game->mlx, so_atloop, game);
 	mlx_do_sync(game->mlx);
 	mlx_loop(game->mlx);
 }
