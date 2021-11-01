@@ -6,19 +6,25 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/10/31 16:17:46 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/11/01 16:14:51 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	so_long
+NAME_B	=	so_long_bonus
 
 SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
 			so_long.c so_moving.c
 
+SRC_B	=	so_main_bonus.c get_next_line_utils.c get_next_line.c \
+			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c
+
 SRC_DIR	=	src
 SRCS	=	${addprefix ${SRC_DIR}/, ${SRC}}
+SRCS_B	=	${addprefix ${SRC_DIR}/bonus/, ${SRC_B}}
 
-HEAD	=	${SRC_DIR}/so_long.h
+HEAD_B	:=	${SRC_DIR}/bonus/so_long_bonus.h
+HEAD	:=	${SRC_DIR}/so_long.h
 
 LIB_DIR	=	libft
 LIB_MLX	=	mlx
@@ -29,7 +35,9 @@ LIB_LIST	:= ${notdir ${LIB_FILES}}
 
 OBJ_DIR		= obj
 OBJS		= ${SRC:%.c=${OBJ_DIR}/%.o}
+OBJS_B		= ${SRC_B:%.c=${OBJ_DIR}/%.o}
 DEPS		= $(OBJS:.o=.d)
+DEPS_B		= $(OBJS_B:.o=.d)
 
 INC_DIRS	= ./${LIB_DIR}/
 INC_FLAG	= $(addprefix -I,$(INC_DIRS))
@@ -42,7 +50,7 @@ CFLAGS	= -Wall -Wextra -Werror
 
 RMR		= rm -r
 
-all:		${NAME}
+all:		${NAME} $(NAME_B)
 
 ${NAME}: 			${SRCS} ${HEAD} ${LIBA} ${OBJS}
 			@${CC} ${CFLAGS} ${MLX_FLAGS} ${LIBA} ${OBJS} -o $@
@@ -59,15 +67,40 @@ ${OBJ_DIR}/%.o:		${SRC_DIR}/%.c ${HEAD}
 			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
 	${PURPLE} -o  $(notdir $@) ${RESET}"
 
+bonus:				$(NAME_B)
+
+${HEAD_B}:
+			HEAD=${HEAD_B}
+
+${NAME_B}: 			${HEAD_B} ${SRCS_B} ${LIBA} ${OBJS_B}
+			@${CC} ${CFLAGS} ${MLX_FLAGS} ${LIBA} ${OBJS_B} -o $@
+			@echo "${NAVY} ${CC} ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
+	${BLUE} ${MLX_FLAGS} \
+	${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
+			
+${OBJ_DIR}/%.o:		${SRC_DIR}/%.c ${HEAD}
+			@mkdir -p ${dir $@}
+			@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
+			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
+	${PURPLE} -o  $(notdir $@) ${RESET}"
+
+${OBJ_DIR}/%.o:		${SRC_DIR}/bonus/%.c ${HEAD_B}
+			@mkdir -p ${dir $@}
+			@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
+			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
+	${PURPLE} -o  $(notdir $@) ${RESET}"
+
+.SILENT:
+
 clean:
-			${RMR} ${OBJ_DIR}
+			-@${RMR}  ${OBJ_DIR} 
 			@echo " delete ${RED} ${filter %.o,${LIB_LIST}} ${RESET}"
 			@$(shell cd $(LIB_DIR); make clean)
 
 fclean:				clean
-			@echo " delete ${RED} $(notdir ${wildcard ${NAME} ${LIB_DIR}/*.a})\
-			${RESET}"
-			@${RM} ${NAME} debug_so
+			@echo " delete ${RED} $(notdir ${wildcard ${NAME} ${LIB_DIR}/*.a \
+			${NAME_B} debug_so}) ${RESET}"
+			@${RM} ${NAME} debug_so ${NAME_B}
 			@$(shell cd $(LIB_DIR); make fclean)
 
 re:					fclean all
@@ -79,10 +112,16 @@ debug_so: 			${SRCS} ${HEAD} ${LIBA}
 
 
 norm:
-			norminette ${SRCS} ${HEAD}
+			norminette ${SRCS} ${HEAD} ${HEAD_B} ${SRCS_B}
 
-.PHONY:		all clean fclean re norm
+norme:
+			@make -i norme
 
+ne:		
+			norminette | grep Error
+
+
+.PHONY:		all clean fclean re norm bonus color
 
 color:
 		@echo "${YELLOW} ${LIBA} ${NAVY} ${CPPFLAGS}"

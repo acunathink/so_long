@@ -4,6 +4,7 @@
 !ft*.c
 !*.h
 !src*
+!src/bonus*
 !so*.c
 !get*.c
 !/src/so_*.h
