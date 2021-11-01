@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/11/01 16:14:51 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/11/01 21:35:24 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,15 @@ NAME_B	=	so_long_bonus
 SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
 			so_long.c so_moving.c
 
-SRC_B	=	so_main_bonus.c get_next_line_utils.c get_next_line.c \
+SRC_B	=	so_main_bonus.c get_next_line_utils_b.c get_next_line_b.c \
 			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c
 
 SRC_DIR	=	src
+SRCbDIR	=	src/bonus
 SRCS	=	${addprefix ${SRC_DIR}/, ${SRC}}
-SRCS_B	=	${addprefix ${SRC_DIR}/bonus/, ${SRC_B}}
+SRCS_B	=	${addprefix ${SRCbDIR}/, ${SRC_B}}
 
-HEAD_B	:=	${SRC_DIR}/bonus/so_long_bonus.h
+HEAD_B	:=	${SRCbDIR}/so_long_bonus.h
 HEAD	:=	${SRC_DIR}/so_long.h
 
 LIB_DIR	=	libft
@@ -77,12 +78,6 @@ ${NAME_B}: 			${HEAD_B} ${SRCS_B} ${LIBA} ${OBJS_B}
 			@echo "${NAVY} ${CC} ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
 	${BLUE} ${MLX_FLAGS} \
 	${PURPLE} $(notdir ${OBJS})	${RESET}  -o ${GREEN} $@ ${RESET}"
-			
-${OBJ_DIR}/%.o:		${SRC_DIR}/%.c ${HEAD}
-			@mkdir -p ${dir $@}
-			@${CC} ${CFLAGS} ${CPPFLAGS} -c $< -o $@
-			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
-	${PURPLE} -o  $(notdir $@) ${RESET}"
 
 ${OBJ_DIR}/%.o:		${SRC_DIR}/bonus/%.c ${HEAD_B}
 			@mkdir -p ${dir $@}
@@ -90,12 +85,15 @@ ${OBJ_DIR}/%.o:		${SRC_DIR}/bonus/%.c ${HEAD_B}
 			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} -c ${RESET} $< \
 	${PURPLE} -o  $(notdir $@) ${RESET}"
 
-.SILENT:
-
-clean:
-			-@${RMR}  ${OBJ_DIR} 
+cleen:
+			@echo " delete ${RED} ${notdir $(wildcard ${OBJ_DIR}/*)} \
+			 ${RESET}"
+			-${RMR}  ${OBJ_DIR}
 			@echo " delete ${RED} ${filter %.o,${LIB_LIST}} ${RESET}"
 			@$(shell cd $(LIB_DIR); make clean)
+
+clean:
+			@make -s -i cleen
 
 fclean:				clean
 			@echo " delete ${RED} $(notdir ${wildcard ${NAME} ${LIB_DIR}/*.a \
@@ -107,24 +105,26 @@ re:					fclean all
 
 debug_so: 			${SRCS} ${HEAD} ${LIBA}
 			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${MLX_FLAGS} ${LIBA} ${SRCS} -o $@
-			@echo "${NAVY} ${CC} -g ${CFLAGS} ${YELLOW} $(notdir ${LIBA}) \
-	${PURPLE} $(notdir ${SRCS})	${RESET}  -o ${GREEN} $@ ${RESET}"
+			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} ${RESET} -g \
+	${BLUE} ${MLX_FLAGS} ${YELLOW} $(notdir ${LIBA}) \
+	${PURPLE} $(notdir ${SRCS}) ${RESET} -o ${GREEN} $@ ${RESET}"
 
 
 norm:
-			norminette ${SRCS} ${HEAD} ${HEAD_B} ${SRCS_B}
+			norminette ${SRCS} ${HEAD} ${HEAD_B} ${SRCS_B} libft/*.[ch]
 
 norme:
-			@make -i norme
+			@make -s -i ne
 
-ne:		
-			norminette | grep Error
+ne:
+			@echo " norminette | grep Error"
+			@norminette | grep Error
 
 
-.PHONY:		all clean fclean re norm bonus color
+.PHONY:		all clean cleen fclean re ne norm norme bonus color
 
 color:
-		@echo "${YELLOW} ${LIBA} ${NAVY} ${CPPFLAGS}"
+		@echo "${YELLOW} ${LIBA} ${NAVY} ${CPPFLAGS} ${BLUE} ${MLX_FLAGS}"
 
 #COLORS
 RED		= \033[0;31m
