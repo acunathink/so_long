@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 22:38:27 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 14:42:19 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_images
 	void	*player;
 	void	*exit;
 	void	*black;
+	void	*undt;
 	int		wid;
 	int		hei;
 }			t_images;
@@ -37,6 +38,7 @@ typedef struct s_images
 # define EXIT "./images/exit.xpm"
 # define PLAY "./images/player_h.xpm"
 # define BLACK "./images/black.xpm"
+# define UND_T "./images/under_text_3.xpm"
 
 typedef struct s_mapconf
 {

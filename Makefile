@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/11/01 21:35:24 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/11/02 14:43:10 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
 			so_long.c so_moving.c
 
 SRC_B	=	so_main_bonus.c get_next_line_utils_b.c get_next_line_b.c \
-			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c
+			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c so_loop.c
 
 SRC_DIR	=	src
 SRCbDIR	=	src/bonus
@@ -103,11 +103,11 @@ fclean:				clean
 
 re:					fclean all
 
-debug_so: 			${SRCS} ${HEAD} ${LIBA}
-			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${MLX_FLAGS} ${LIBA} ${SRCS} -o $@
+debug_so: 			${SRCS_B} ${HEAD_B} ${LIBA}
+			@${CC} -g ${CFLAGS} ${CPPFLAGS} ${MLX_FLAGS} ${LIBA} ${SRCS_B} -o $@
 			@echo "${NAVY} ${CC} ${CFLAGS} ${CPPFLAGS} ${RESET} -g \
 	${BLUE} ${MLX_FLAGS} ${YELLOW} $(notdir ${LIBA}) \
-	${PURPLE} $(notdir ${SRCS}) ${RESET} -o ${GREEN} $@ ${RESET}"
+	${PURPLE} $(notdir ${SRCS_B}) ${RESET} -o ${GREEN} $@ ${RESET}"
 
 
 norm:

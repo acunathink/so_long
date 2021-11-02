@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:00:59 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 22:32:15 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 14:42:24 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	so_image_init(t_mapconf *game)
 		.grass = mlx_xpm_file_to_image(game->mlx, GRAS, &img->wid, &img->hei),
 		.player = mlx_xpm_file_to_image(game->mlx, PLAY, &img->wid, &img->hei),
 		.exit = mlx_xpm_file_to_image(game->mlx, EXIT, &img->wid, &img->hei),
-		.black = mlx_xpm_file_to_image(game->mlx, BLACK, &img->wid, &img->hei)
+		.black = mlx_xpm_file_to_image(game->mlx, BLACK, &img->wid, &img->hei),
+		.undt = mlx_xpm_file_to_image(game->mlx, UND_T, &img->wid, &img->hei)
 	};
 	if (!img->colect || !img->wall || !img->grass || !img->player || !img->exit)
 		exit(so_end_with_error("unable to use images"));
