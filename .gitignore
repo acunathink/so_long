@@ -12,9 +12,10 @@
 !*.ber
 !Makefile
 !images*
-!exit.xpm
+!exit*
 !collectable*
 !player*
+!Fredd*
 !wall.xpm
 !grass*
 !black.xpm

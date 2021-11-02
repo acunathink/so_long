@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/11/02 14:43:10 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/11/02 17:12:29 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC		=	so_main.c get_next_line_utils.c get_next_line.c so_mapcheck.c \
 			so_long.c so_moving.c
 
 SRC_B	=	so_main_bonus.c get_next_line_utils_b.c get_next_line_b.c \
-			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c so_loop.c
+			so_mapcheck_bonus.c so_long_bonus.c so_moving_bonus.c so_loop.c \
+			so_tools.c
 
 SRC_DIR	=	src
 SRCbDIR	=	src/bonus
@@ -117,7 +118,7 @@ norme:
 			@make -s -i ne
 
 ne:
-			@echo " norminette | grep Error"
+			@echo "${YELL} norminette | grep Error ${RESET}"
 			@norminette | grep Error
 
 
@@ -129,8 +130,10 @@ color:
 #COLORS
 RED		= \033[0;31m
 BLUE	= \033[0;34m
+DRN		= \033[2;32m
 GREEN	= \033[0;32m
 YELLOW	= \033[0;33m
+YELL	= \033[2;33m
 PURPLE	= \033[0;35m
 NAVY	= \033[0;36m
 RESET	= \033[0m

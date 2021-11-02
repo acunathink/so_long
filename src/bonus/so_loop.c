@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 14:40:28 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 14:42:37 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 19:32:26 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,17 @@ void	so_draw_count(t_mapconf *gm, char **step)
 
 int	so_atloop(t_mapconf *gm)
 {
-	char	*step;
+	char			*step;
+	static size_t	check;
 
 	step = ft_itoa(gm->step);
+	printf(YELL "\n check = %zu" WHT, ++check);
+	if (!(check % 12))
+	{
+		so_print_sprite(gm, 'E');
+		++gm->loop;
+	}
 	so_draw_count(gm, &step);
+	free(step);
 	return (0);
 }

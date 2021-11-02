@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 14:42:19 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 19:02:19 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_images
 	void	*colect;
 	void	*wall;
 	void	*grass;
-	void	*player;
-	void	*exit;
+	void	*player[4];
+	void	*exit[4];
 	void	*black;
 	void	*undt;
 	int		wid;
@@ -35,8 +35,8 @@ typedef struct s_images
 # define COLL "./images/collectable_h.xpm"
 # define WALL "./images/wall.xpm"
 # define GRAS "./images/grass_h.xpm"
-# define EXIT "./images/exit.xpm"
-# define PLAY "./images/player_h.xpm"
+# define EXIT "./images/exit0.xpm"
+# define PLAY "./images/Freddy0.xpm"
 # define BLACK "./images/black.xpm"
 # define UND_T "./images/under_text_3.xpm"
 
@@ -53,6 +53,7 @@ typedef struct s_mapconf
 	size_t		step;
 	size_t		x;
 	size_t		y;
+	size_t		loop;
 	int			key;
 	void		*mlx;
 	void		*window;
@@ -86,5 +87,6 @@ int		so_close_game(int keycode, t_mapconf *gm);
 void	so_print_map(t_mapconf *mc);
 int		so_atloop(t_mapconf *gm);
 void	so_print_image(t_mapconf *game);
+void	so_print_sprite(t_mapconf *game, char sprite);
 
 #endif
