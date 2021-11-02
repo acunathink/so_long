@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 19:02:19 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 21:34:47 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,7 @@
 # include <mlx.h>
 # include "libft.h"
 # include "get_next_line.h"
-
-typedef struct s_images
-{
-	void	*colect;
-	void	*wall;
-	void	*grass;
-	void	*player[4];
-	void	*exit[4];
-	void	*black;
-	void	*undt;
-	int		wid;
-	int		hei;
-}			t_images;
-
-# define COLL "./images/collectable_h.xpm"
-# define WALL "./images/wall.xpm"
-# define GRAS "./images/grass_h.xpm"
-# define EXIT "./images/exit0.xpm"
-# define PLAY "./images/Freddy0.xpm"
-# define BLACK "./images/black.xpm"
-# define UND_T "./images/under_text_3.xpm"
+# include "so_long_images.h"
 
 typedef struct s_mapconf
 {
@@ -60,20 +40,20 @@ typedef struct s_mapconf
 	t_images	*img;
 }				t_mapconf;
 
-# define WINNER -777
-# define PRESS_ESC 53
+# define WINNER -777	//custom keycode
+# define PRESS_ESC 53	//press ESC to quit the game
 # define PRESS_W 13
 # define PRESS_A 0
 # define PRESS_S 1
 # define PRESS_D 2
-# define MAP 46
-# define PK 40
-# define P 35
+# define MAP 46			//press M to print map in STDOUT
+# define PK 40			//press K to print keycode in STDOUT
+# define P 35			//press P to YELLOW output
 # define UP 126
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
-# define COLOR 8
+# define COLOR 8		//press C to default color in output
 
 void	so_parsing_map(char ***av, t_mapconf *game);
 void	so_arg_check(int ac, char ***av);

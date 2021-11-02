@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:50:36 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/31 20:35:14 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/02 20:12:23 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	so_parsing_map(char ***av, t_mapconf *game)
 		exit(so_end_with_error("perror"));
 	count = so_add_list_of_lines(fd, &lines);
 	if (count <= 0)
-		exit(so_end_with_error("empty map file"));
+		exit(so_end_with_error("have not map here"));
 	so_map_conf_init(game, count);
 	tmp = lines;
 	game->col = ft_strlen(tmp->content);
