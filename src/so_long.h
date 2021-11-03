@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/10/31 20:39:21 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 19:38:54 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct s_images
 # define COLL "./images/collectable_h.xpm"
 # define WALL "./images/wall.xpm"
 # define GRAS "./images/grass_h.xpm"
-# define EXIT "./images/exit.xpm"
-# define PLAY "./images/player_h.xpm"
+# define EXIT "./images/exit00.xpm"
+# define PLAY "./images/Freddy00.xpm"
 # define BLACK "./images/black.xpm"
 
 typedef struct s_mapconf

@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 14:57:34 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/03 18:45:33 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 19:53:02 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	so_close_game(int keycode, t_mapconf *gm)
 {
 	if (keycode == WINNER)
 	{
-		if (gm->map[gm->y][gm->x] != 'G')
+		if (gm->map[gm->y][gm->x] != 'G' && !gm->colect)
 		{
 			ft_putendl_fd(GRN "\n YOU are WINNER\n" WHT, 1);
 			mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, \
@@ -90,7 +90,7 @@ int	so_close_game(int keycode, t_mapconf *gm)
 		{
 			ft_putendl_fd(RED "\n GAME OVER \n" WHT, 1);
 			mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, \
-			0xFF0FA0, "~~YOU~DIED~~");
+			0xFF0FA0, "~~~YOU~DIED~~~");
 		}
 		gm->map[gm->y - 1][gm->x] = '1';
 		gm->map[gm->y + 1][gm->x] = '1';
