@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 16:00:59 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/03 15:01:08 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:26:24 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,17 @@ int	so_sprite_init(t_mapconf *g, void **sp, const char *path, int num)
 	char	*sprite;
 
 	sprite = ft_strdup(path);
+	sprite[num - 1] = g->key + '0';
 	g->key = 0;
 	while (g->key < 4)
 	{
 		sprite[num] = (char)(g->key + '0');
-//		printf(RED "\nsprite: %s" WHT, sprite);
 		sp[g->key] = mlx_xpm_file_to_image(g->mlx, sprite, \
 											&g->img->wid, &g->img->hei);
 		if (!sp[g->key++])
 			return (0);
 	}
+	g->key = 0;
 	free(sprite);
 	return (1);
 }
@@ -50,12 +51,16 @@ int	so_sprites_init(t_mapconf *g, t_images *img)
 	int	line_s;
 
 	line_s = 0;
+	g->key = 0;
 	if (!so_sprite_init(g, &(img->player[0]), PLAY, PLAY_NUM_AT) || \
 		!so_sprite_init(g, &(img->exit[0]), EXIT, EXIT_NUM_AT))
 		return (0);
 	while (line_s < 2)
+	{
+		g->key = line_s;
 		if (!so_sprite_init(g, &(img->ghost[line_s++][0]), GHOST, GHOST_NUM))
 			return (0);
+	}
 	return (1);
 }
 
@@ -92,9 +97,6 @@ void	so_long(t_mapconf *game)
 	so_image_init(game);
 	mlx_key_hook(game->window, so_press_key, game);
 	mlx_hook(game->window, 17, 0, so_close_game, game);
-	mlx_do_key_autorepeaton(game->mlx);
-//	mlx_hook(game->window, 17, 0, so_press_key, game);
-//	mlx_loop_hook(game->mlx, so_press_key, game);
 	mlx_loop_hook(game->mlx, so_atloop, game);
 	mlx_do_sync(game->mlx);
 	mlx_loop(game->mlx);

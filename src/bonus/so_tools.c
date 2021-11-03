@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 17:11:10 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/03 14:59:02 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:30:06 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	so_put_image(int x, int y, t_mapconf *g)
 					g->img->wid * x, g->img->hei * y);
 	else if (g->map[y][x] == 'G')
 		mlx_put_image_to_window
-		(g->mlx, g->window, g->img->ghost[0][0], \
+		(g->mlx, g->window, g->img->ghost[g->ghost->n0][g->ghost->n1], \
 					x * g->img->wid, y * g->img->hei);
 	else if (g->map[y][x] == 'E')
 		mlx_put_image_to_window
@@ -50,8 +50,14 @@ void	so_print_sprite(t_mapconf *gm, char sprite)
 		{
 			if (gm->map[y][x] == sprite)
 			{
-				mlx_put_image_to_window(gm->mlx, gm->window, gm->img->black, \
-								x * gm->img->wid, y * gm->img->hei);
+				mlx_put_image_to_window(gm->mlx, gm->window, \
+					gm->img->black, x * gm->img->wid, y * gm->img->hei);
+				if (sprite == 'G')
+				{
+					gm->map[y][x] = gm->ghost->ex[0];
+					so_put_image(x, y, gm);
+					gm->map[y][x] = sprite;
+				}
 				so_put_image(x, y, gm);
 			}
 		}
@@ -76,13 +82,13 @@ int	so_end_with_error(char *msg)
 
 void	so_add_ghost(t_mapconf *gm, size_t y, size_t x)
 {
-	t_ghost *new;
-	t_ghost *last;
+	t_ghost	*new;
+	t_ghost	*last;
 
 	last = gm->ghost;
 	new = (t_ghost *)malloc(sizeof(t_ghost));
 	*new = (t_ghost)
-			{.ex = {'0'}, .x = x, .y = y, .next = NULL, .n0 = 0, .n1 = 0};
+	{.ex = {'0'}, .x = x, .y = y, .next = NULL, .n0 = 0, .n1 = 0};
 	if (!gm->ghost)
 		gm->ghost = new;
 	else

@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 14:57:34 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 16:31:39 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 18:45:33 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,27 @@ int	so_close_game(int keycode, t_mapconf *gm)
 {
 	if (keycode == WINNER)
 	{
-		ft_putendl_fd(GRN "\n YOU are WINNER\n" WHT, 1);
-		mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, 0x90FFA0, \
-		"YOU are WINNER");
+		if (gm->map[gm->y][gm->x] != 'G')
+		{
+			ft_putendl_fd(GRN "\n YOU are WINNER\n" WHT, 1);
+			mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, \
+			0x90FFA0, "YOU are WINNER");
+			gm->x /= 2;
+			gm->y /= 2;
+		}
+		else
+		{
+			ft_putendl_fd(RED "\n GAME OVER \n" WHT, 1);
+			mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, \
+			0xFF0FA0, "~~YOU~DIED~~");
+		}
 		gm->map[gm->y - 1][gm->x] = '1';
 		gm->map[gm->y + 1][gm->x] = '1';
 		gm->map[gm->y][gm->x + 1] = '1';
 		gm->map[gm->y][gm->x - 1] = '1';
-		mlx_hook(gm->window, 17, 0, so_close_game, gm);
 		mlx_loop(gm->mlx);
 	}
 	else
 		ft_putendl_fd(NAVY "\nsee you later..\n" WHT, 1);
-	fflush(NULL);
-	(void) gm;
-	(void) keycode;
 	exit(0);
 }

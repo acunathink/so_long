@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/03 14:55:18 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 17:35:03 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "so_long_images.h"
-
 
 typedef struct s_ghost
 {

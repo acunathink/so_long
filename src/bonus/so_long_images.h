@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 21:26:57 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 22:35:42 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 16:42:57 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ typedef struct s_images
 # define GRAS "./images/grass_h.xpm"
 # define BLACK "./images/black.xpm"
 # define UND_T "./images/under_text_3.xpm"
-# define EXIT "./images/exit0.xpm"
-# define EXIT_NUM_AT 13
-# define PLAY "./images/Freddy0.xpm"
-# define PLAY_NUM_AT 15
+# define EXIT "./images/exit00.xpm"
+# define EXIT_NUM_AT 14
+# define PLAY "./images/Freddy00.xpm"
+# define PLAY_NUM_AT 16
 # define GHOST "./images/ghost00.xpm"
 # define GHOST_NUM 15
 
