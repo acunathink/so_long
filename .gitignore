@@ -12,6 +12,8 @@
 !*.ber
 !Makefile
 !images*
+!under_text_3.xpm
+!ghost*.xpm
 !exit*
 !collectable*
 !player*

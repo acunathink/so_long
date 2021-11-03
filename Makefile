@@ -6,7 +6,7 @@
 #    By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 16:13:31 by ojospeh           #+#    #+#              #
-#    Updated: 2021/11/02 17:12:29 by ojospeh          ###   ########.fr        #
+#    Updated: 2021/11/02 22:25:26 by ojospeh          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCbDIR	=	src/bonus
 SRCS	=	${addprefix ${SRC_DIR}/, ${SRC}}
 SRCS_B	=	${addprefix ${SRCbDIR}/, ${SRC_B}}
 
-HEAD_B	:=	${SRCbDIR}/so_long_bonus.h
+HEAD_B	:=	${SRCbDIR}/so_long_bonus.h ${SRCbDIR}/so_long_images.h
 HEAD	:=	${SRC_DIR}/so_long.h
 
 LIB_DIR	=	libft

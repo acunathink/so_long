@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:21:55 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/01 15:21:54 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:40:19 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,15 @@ void	so_map_check(t_mapconf *gm)
 		{
 			if (gm->map[gm->hei][gm->wid] == 'C')
 				gm->colect++;
+			else if (gm->map[gm->hei][gm->wid] == 'G')
+				so_add_ghost(gm, gm->hei, gm->wid);
 			else if (gm->map[gm->hei][gm->wid] == 'E')
 				gm->exit++;
 			else if (gm->map[gm->hei][gm->wid] == 'P')
 				so_player_check(gm);
 			else if (gm->map[gm->hei][gm->wid] != '1' && \
-					gm->map[gm->hei][gm->wid] != '0')
+					gm->map[gm->hei][gm->wid] != '0' && \
+					gm->map[gm->hei][gm->wid] != 'G')
 				exit(so_end_with_error("unknown map format"));
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 14:47:01 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/02 21:34:47 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 14:55:18 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 # include "get_next_line.h"
 # include "so_long_images.h"
 
+
+typedef struct s_ghost
+{
+	int		n0;
+	int		n1;
+	size_t	x;
+	size_t	y;
+	char	ex[2];
+	void	*next;
+
+}			t_ghost;
+
 typedef struct s_mapconf
 {
 	char		**map;
@@ -29,6 +41,7 @@ typedef struct s_mapconf
 	size_t		hei;
 	size_t		colect;
 	size_t		player;
+	t_ghost		*ghost;
 	size_t		exit;
 	size_t		step;
 	size_t		x;
@@ -68,5 +81,6 @@ void	so_print_map(t_mapconf *mc);
 int		so_atloop(t_mapconf *gm);
 void	so_print_image(t_mapconf *game);
 void	so_print_sprite(t_mapconf *game, char sprite);
+void	so_add_ghost(t_mapconf *gm, size_t y, size_t x);
 
 #endif
