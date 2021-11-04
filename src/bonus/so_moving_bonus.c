@@ -6,7 +6,7 @@
 /*   By: ojospeh <ojospeh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/31 14:57:34 by ojospeh           #+#    #+#             */
-/*   Updated: 2021/11/03 19:53:02 by ojospeh          ###   ########.fr       */
+/*   Updated: 2021/11/03 22:24:13 by ojospeh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	so_close_game(int keycode, t_mapconf *gm)
 			ft_putendl_fd(GRN "\n YOU are WINNER\n" WHT, 1);
 			mlx_string_put(gm->mlx, gm->window, gm->wid / 3, gm->hei / 3, \
 			0x90FFA0, "YOU are WINNER");
-			gm->x /= 2;
-			gm->y /= 2;
+			gm->x = (gm->x / 2) + 1;
+			gm->y = (gm->y / 2) + 1;
 		}
 		else
 		{
